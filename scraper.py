@@ -59,3 +59,21 @@ for mac_link in mac_links:
         e(soup, mac)
     
 PrettyPrinter().pprint(macs)
+
+for mac in macs:
+    spec_list = ""
+    for key in mac:
+        spec_list = spec_list + "</li><li>" + key + ": " + mac[key]
+    mac_html = """<!DOCTYPE html>
+<html>
+    <head></title>""" + mac['name'] + """</title>
+    </head>
+    <body>
+    <ul>
+        <li>""" + spec_list + """</li>
+    </ul>
+    </body>
+<html>"""
+    mac_html_path = 'html/' + mac['name'].replace('/', '-') + '.html'
+    with open(mac_html_path, 'w') as f:
+        f.write(mac_html.encode('utf-8'))
